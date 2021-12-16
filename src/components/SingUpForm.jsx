@@ -1,6 +1,6 @@
 const SingUpForm = () => {
   return (
-    <div>
+    <div className="container">
       <form>
         <div className="formControl">
           <label htmlFor="name">Name</label>
@@ -14,6 +14,7 @@ const SingUpForm = () => {
           <label htmlFor="password">Password</label>
           <input type="text" />
         </div>
+        <button>submit</button>
       </form>
     </div>
   );
