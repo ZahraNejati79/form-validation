@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 button:focus {
-  background-color: rgb(151, 110, 189);
+  background-color: rgb(174, 126, 219);
 }
 input:focus {
   border: 1px solid rgb(151, 110, 189);
