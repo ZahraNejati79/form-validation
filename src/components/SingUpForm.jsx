@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useFormik } from "formik";
 
 const SingUpForm = () => {
-  const [inputform, setInputForm] = useState({
-    name: "",
-    email: "",
-    password: "",
+  //   const [inputform, setInputForm] = useState({
+  //     name: "",
+  //     email: "",
+  //     password: "",
+  //   });
+  //   const changeHandler = (e) => {
+  //     setInputForm({ ...inputform, [e.target.name]: e.target.value });
+  //     console.log(inputform);
+  //   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
   });
-  const changeHandler = (e) => {
-    setInputForm({ ...inputform, [e.target.name]: e.target.value });
-    console.log(inputform);
-  };
   const submitHandler = (e) => {
     e.preventDefault();
   };
+
   return (
     <div className="container">
       <form onSubmit={submitHandler}>
@@ -20,8 +29,10 @@ const SingUpForm = () => {
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            onChange={changeHandler}
-            value={inputform.name}
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            // onChange={changeHandler}
+            // value={inputform.name}
             name="name"
           />
         </div>
@@ -29,8 +40,10 @@ const SingUpForm = () => {
           <label htmlFor="email">Email</label>
           <input
             type="text"
-            onChange={changeHandler}
-            value={inputform.email}
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            // onChange={changeHandler}
+            // value={inputform.email}
             name="email"
           />
         </div>
@@ -39,8 +52,10 @@ const SingUpForm = () => {
           <input
             name="password"
             type="text"
-            onChange={changeHandler}
-            value={inputform.password}
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            // onChange={changeHandler}
+            // value={inputform.password}
           />
         </div>
         <button type="submit">submit</button>
