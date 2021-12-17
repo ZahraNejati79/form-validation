@@ -11,20 +11,37 @@ const SingUpForm = () => {
   //     console.log(inputform);
   //   };
 
+  const validate = (values) => {
+    let errors = {};
+    if (!values.name) {
+      errors.name = "Name is required";
+    }
+    if (!values.email) {
+      errors.email = "Email is required";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    }
+
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       password: "",
     },
+    onSubmit: (values) => console.log(values),
+    validate,
   });
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <div className="container">
-      <form onSubmit={submitHandler}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label htmlFor="name">Name</label>
           <input
