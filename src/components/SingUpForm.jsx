@@ -38,6 +38,7 @@ const SingUpForm = () => {
   // const submitHandler = (e) => {
   //   e.preventDefault();
   // };
+  console.log(formik.touched);
 
   return (
     <div className="container">
@@ -48,10 +49,14 @@ const SingUpForm = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.name}
+            onBlur={formik.handleBlur}
             // onChange={changeHandler}
             // value={inputform.name}
             name="name"
           />
+          {formik.errors.name && formik.touched.password && (
+            <div className="error">{formik.errors.name}</div>
+          )}
         </div>
         <div className="formControl">
           <label htmlFor="email">Email</label>
@@ -59,10 +64,14 @@ const SingUpForm = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.email}
+            onBlur={formik.handleBlur}
             // onChange={changeHandler}
             // value={inputform.email}
             name="email"
           />
+          {formik.errors.email && formik.touched.email && (
+            <div className="error">{formik.errors.email}</div>
+          )}
         </div>
         <div className="formControl">
           <label htmlFor="password">Password</label>
@@ -71,9 +80,13 @@ const SingUpForm = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.password}
+            onBlur={formik.handleBlur}
             // onChange={changeHandler}
             // value={inputform.password}
           />
+          {formik.errors.password && formik.touched.password && (
+            <div className="error">{formik.errors.password}</div>
+          )}
         </div>
         <button type="submit">submit</button>
       </form>

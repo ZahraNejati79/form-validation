@@ -50,3 +50,6 @@ input:focus {
   border: 1px solid rgb(151, 110, 189);
   outline: none;
 }
+.error {
+  color: rgb(206, 26, 26);
+}
