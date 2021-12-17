@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const SingUpForm = () => {
   //   const [inputform, setInputForm] = useState({
@@ -11,20 +12,28 @@ const SingUpForm = () => {
   //     console.log(inputform);
   //   };
 
-  const validate = (values) => {
-    let errors = {};
-    if (!values.name) {
-      errors.name = "Name is required";
-    }
-    if (!values.email) {
-      errors.email = "Email is required";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    }
+  // const validate = (values) => {
+  //   let errors = {};
+  //   if (!values.name) {
+  //     errors.name = "Name is required";
+  //   }
+  //   if (!values.email) {
+  //     errors.email = "Email is required";
+  //   }
+  //   if (!values.password) {
+  //     errors.password = "Password is required";
+  //   }
 
-    return errors;
-  };
+  //   return errors;
+  // };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -33,7 +42,8 @@ const SingUpForm = () => {
       password: "",
     },
     onSubmit: (values) => console.log(values),
-    validate,
+    // validate,
+    validationSchema,
   });
   // const submitHandler = (e) => {
   //   e.preventDefault();
