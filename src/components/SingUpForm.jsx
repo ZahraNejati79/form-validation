@@ -57,9 +57,10 @@ const SingUpForm = () => {
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("name")}
+            // onChange={formik.handleChange}
+            // value={formik.values.name}
+            // onBlur={formik.handleBlur}
             // onChange={changeHandler}
             // value={inputform.name}
             name="name"
@@ -72,9 +73,10 @@ const SingUpForm = () => {
           <label htmlFor="email">Email</label>
           <input
             type="text"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
+            // onChange={formik.handleChange}
+            // value={formik.values.email}
+            // onBlur={formik.handleBlur}
+            {...formik.getFieldProps("email")}
             // onChange={changeHandler}
             // value={inputform.email}
             name="email"
@@ -88,9 +90,10 @@ const SingUpForm = () => {
           <input
             name="password"
             type="text"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
+            // onChange={formik.handleChange}
+            // value={formik.values.password}
+            // onBlur={formik.handleBlur}
+            {...formik.getFieldProps("password")}
             // onChange={changeHandler}
             // value={inputform.password}
           />
