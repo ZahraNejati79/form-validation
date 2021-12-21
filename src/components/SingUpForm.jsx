@@ -32,13 +32,20 @@ const SingUpForm = () => {
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
+    phoneNumber: Yup.string()
+      .required("phone number is required")
+      .matches(/^[0-9]{11}$/, "phone number is not valid"),
     password: Yup.string().required("Password is required"),
+    passwordConfirm: Yup.string()
+      .required("Password Confirm is required")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
+      phoneNumber: "",
       password: "",
     },
     onSubmit: (values) => console.log(values),
@@ -86,6 +93,17 @@ const SingUpForm = () => {
           )}
         </div>
         <div className="formControl">
+          <label htmlFor="phoneNumber">phone Number</label>
+          <input
+            type="text"
+            {...formik.getFieldProps("phoneNumber")}
+            name="phoneNumber"
+          />
+          {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+            <div className="error">{formik.errors.phoneNumber}</div>
+          )}
+        </div>
+        <div className="formControl">
           <label htmlFor="password">Password</label>
           <input
             name="password"
@@ -99,6 +117,17 @@ const SingUpForm = () => {
           />
           {formik.errors.password && formik.touched.password && (
             <div className="error">{formik.errors.password}</div>
+          )}
+        </div>
+        <div className="passwordConfirm">
+          <label htmlFor="phoneNumber">password Confirm</label>
+          <input
+            type="text"
+            {...formik.getFieldProps("passwordConfirm")}
+            name="passwordConfirm"
+          />
+          {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
+            <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
         <button type="submit">submit</button>

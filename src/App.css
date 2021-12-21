@@ -36,6 +36,9 @@
   border: 1px solid rgb(209, 209, 209);
   border-radius: 5px;
 }
+.container label {
+  font-weight: 700;
+}
 .container button {
   background-color: rgb(236, 225, 247);
   border: 1px solid rgb(209, 209, 209);
