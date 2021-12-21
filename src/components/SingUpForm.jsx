@@ -51,6 +51,7 @@ const SingUpForm = () => {
     onSubmit: (values) => console.log(values),
     // validate,
     validationSchema,
+    validateOnMount: true,
   });
   // const submitHandler = (e) => {
   //   e.preventDefault();
@@ -130,7 +131,9 @@ const SingUpForm = () => {
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
-        <button type="submit">submit</button>
+        <button type="submit" disabled={!formik.isValid}>
+          submit
+        </button>
       </form>
     </div>
   );
