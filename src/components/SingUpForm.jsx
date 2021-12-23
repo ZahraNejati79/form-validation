@@ -62,8 +62,11 @@ const SingUpForm = () => {
     <div className="container">
       <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name" htmlFor="name">
+            Name
+          </label>
           <input
+            id="name"
             type="text"
             {...formik.getFieldProps("name")}
             // onChange={formik.handleChange}
@@ -80,6 +83,7 @@ const SingUpForm = () => {
         <div className="formControl">
           <label htmlFor="email">Email</label>
           <input
+            id="email"
             type="text"
             // onChange={formik.handleChange}
             // value={formik.values.email}
@@ -96,6 +100,7 @@ const SingUpForm = () => {
         <div className="formControl">
           <label htmlFor="phoneNumber">phone Number</label>
           <input
+            id="phoneNumber"
             type="text"
             {...formik.getFieldProps("phoneNumber")}
             name="phoneNumber"
@@ -107,6 +112,7 @@ const SingUpForm = () => {
         <div className="formControl">
           <label htmlFor="password">Password</label>
           <input
+            id="password"
             name="password"
             type="text"
             // onChange={formik.handleChange}
@@ -120,9 +126,10 @@ const SingUpForm = () => {
             <div className="error">{formik.errors.password}</div>
           )}
         </div>
-        <div className="passwordConfirm">
-          <label htmlFor="phoneNumber">password Confirm</label>
+        <div className="passwordConfirm formControl">
+          <label htmlFor="passwordConfirm">password Confirm</label>
           <input
+            id="passwordConfirm"
             type="text"
             {...formik.getFieldProps("passwordConfirm")}
             name="passwordConfirm"
@@ -131,6 +138,34 @@ const SingUpForm = () => {
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
+
+        <div className="formControl">
+          <div className="radio">
+            <div className="male">
+              <label htmlFor="0">male</label>
+              <input
+                type="radio"
+                id="0"
+                value="0"
+                onChange={formik.handleChange}
+                name="gender"
+                checked={formik.values.gender === "0"}
+              />
+            </div>
+            <div className="female">
+              <label htmlFor="1">female</label>
+              <input
+                type="radio"
+                id="1"
+                value="1"
+                onChange={formik.handleChange}
+                name="gender"
+                checked={formik.values.gender === "1"}
+              />
+            </div>
+          </div>
+        </div>
+
         <button type="submit" disabled={!formik.isValid}>
           submit
         </button>
