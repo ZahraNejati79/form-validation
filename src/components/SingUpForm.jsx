@@ -1,7 +1,9 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
 const SingUpForm = () => {
+  const [formValues, setFormValues] = useState(null);
   //   const [inputform, setInputForm] = useState({
   //     name: "",
   //     email: "",
@@ -41,17 +43,30 @@ const SingUpForm = () => {
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
+  const saveData = {
+    name: "Zahra",
+    email: "nejati@gmail.com",
+    phoneNumber: "09333236598",
+    password: "123",
+    passwordConfirm: "123",
+    gender: "1",
+  };
+  const initialValues = {
+    name: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    passwordConfirm: "",
+    gender: "",
+  };
+
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-    },
+    initialValues: formValues || initialValues,
     onSubmit: (values) => console.log(values),
     // validate,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize: true,
   });
   // const submitHandler = (e) => {
   //   e.preventDefault();
@@ -164,11 +179,13 @@ const SingUpForm = () => {
               />
             </div>
           </div>
+          <div>
+            <button onClick={() => setFormValues(saveData)}>louad</button>
+            <button type="submit" disabled={!formik.isValid}>
+              submit
+            </button>
+          </div>
         </div>
-
-        <button type="submit" disabled={!formik.isValid}>
-          submit
-        </button>
       </form>
     </div>
   );
