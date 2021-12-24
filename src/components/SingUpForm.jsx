@@ -3,33 +3,14 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Input from "../common/Input";
+import RadioInput from "../common/RadioInput";
 
 const SingUpForm = () => {
   const [formValues, setFormValues] = useState(null);
-  //   const [inputform, setInputForm] = useState({
-  //     name: "",
-  //     email: "",
-  //     password: "",
-  //   });
-  //   const changeHandler = (e) => {
-  //     setInputForm({ ...inputform, [e.target.name]: e.target.value });
-  //     console.log(inputform);
-  //   };
-
-  // const validate = (values) => {
-  //   let errors = {};
-  //   if (!values.name) {
-  //     errors.name = "Name is required";
-  //   }
-  //   if (!values.email) {
-  //     errors.email = "Email is required";
-  //   }
-  //   if (!values.password) {
-  //     errors.password = "Password is required";
-  //   }
-
-  //   return errors;
-  // };
+  const radioOptions = [
+    { label: "Male", value: "0" },
+    { label: "Female", value: "1" },
+  ];
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
@@ -68,9 +49,7 @@ const SingUpForm = () => {
     validateOnMount: true,
     enableReinitialize: true,
   });
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  // };
+
   console.log(formik.touched);
 
   return (
@@ -92,37 +71,10 @@ const SingUpForm = () => {
           type="password"
         />
 
-        <div className="formControl">
-          <div className="radio">
-            <div className="male">
-              <label htmlFor="0">male</label>
-              <input
-                type="radio"
-                id="0"
-                value="0"
-                onChange={formik.handleChange}
-                name="gender"
-                checked={formik.values.gender === "0"}
-              />
-            </div>
-            <div className="female">
-              <label htmlFor="1">female</label>
-              <input
-                type="radio"
-                id="1"
-                value="1"
-                onChange={formik.handleChange}
-                name="gender"
-                checked={formik.values.gender === "1"}
-              />
-            </div>
-          </div>
-          <div>
-            <button type="submit" disabled={!formik.isValid}>
-              submit
-            </button>
-          </div>
-        </div>
+        <RadioInput name="gender" formik={formik} radioOptions={radioOptions} />
+        <button type="submit" disabled={!formik.isValid}>
+          submit
+        </button>
       </form>
     </div>
   );
