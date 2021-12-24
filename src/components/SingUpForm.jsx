@@ -1,5 +1,6 @@
+import axios from "axios";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 const SingUpForm = () => {
@@ -42,15 +43,13 @@ const SingUpForm = () => {
       .required("Password Confirm is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/user/1")
+      .then((res) => setFormValues(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-  const saveData = {
-    name: "Zahra",
-    email: "nejati@gmail.com",
-    phoneNumber: "09333236598",
-    password: "123",
-    passwordConfirm: "123",
-    gender: "1",
-  };
   const initialValues = {
     name: "",
     email: "",
@@ -180,7 +179,6 @@ const SingUpForm = () => {
             </div>
           </div>
           <div>
-            <button onClick={() => setFormValues(saveData)}>louad</button>
             <button type="submit" disabled={!formik.isValid}>
               submit
             </button>
