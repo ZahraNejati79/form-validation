@@ -76,3 +76,7 @@ input:focus {
 .Male {
   margin-right: 10px;
 }
+.terms {
+  display: flex;
+  justify-content: flex-start;
+}

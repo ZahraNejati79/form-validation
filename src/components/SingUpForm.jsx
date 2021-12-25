@@ -38,6 +38,10 @@ const SingUpForm = () => {
     gender: Yup.string().required("gender is required"),
     nationality: Yup.string().required("nationality is required"),
     intrests: Yup.array().min(1).required("You must select an item"),
+    terms: Yup.boolean().oneOf(
+      [true],
+      "You must accept the terms and conditions"
+    ),
   });
   useEffect(() => {
     axios
@@ -55,6 +59,7 @@ const SingUpForm = () => {
     gender: "",
     nationality: "",
     intrests: [],
+    terms: false,
   };
 
   const formik = useFormik({
@@ -100,6 +105,24 @@ const SingUpForm = () => {
           formik={formik}
           checkBoxOptions={checkBoxOptions}
         />
+
+        <div className="formControl">
+          <div className="terms">
+            <input
+              type="checkbox"
+              id="terms"
+              value="terms"
+              onChange={formik.handleChange}
+              name="terms"
+              checked={formik.values.terms}
+            />
+            <label htmlFor="terms">Terms and Conditions</label>
+
+            {formik.errors.terms && formik.touched.terms && (
+              <div className="error">{formik.errors.terms}</div>
+            )}
+          </div>
+        </div>
 
         <button type="submit" disabled={!formik.isValid}>
           submit
