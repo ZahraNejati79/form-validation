@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Input from "../common/Input";
 import RadioInput from "../common/RadioInput";
+import Select from "../common/Select";
 
 const SingUpForm = () => {
   const [formValues, setFormValues] = useState(null);
@@ -12,6 +13,11 @@ const SingUpForm = () => {
     { label: "Female", value: "1" },
   ];
 
+  const selectOptions = [
+    { label: "select nationality ...", value: "" },
+    { label: "Iran", value: "IR" },
+    { label: "USA", value: "US" },
+  ];
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
@@ -24,6 +30,8 @@ const SingUpForm = () => {
     passwordConfirm: Yup.string()
       .required("Password Confirm is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    gender: Yup.string().required("gender is required"),
+    nationality: Yup.string().required("nationality is required"),
   });
   useEffect(() => {
     axios
@@ -39,6 +47,7 @@ const SingUpForm = () => {
     password: "",
     passwordConfirm: "",
     gender: "",
+    nationality: "",
   };
 
   const formik = useFormik({
@@ -72,6 +81,13 @@ const SingUpForm = () => {
         />
 
         <RadioInput name="gender" formik={formik} radioOptions={radioOptions} />
+
+        <Select
+          selectOptions={selectOptions}
+          name="nationality"
+          formik={formik}
+        />
+
         <button type="submit" disabled={!formik.isValid}>
           submit
         </button>
